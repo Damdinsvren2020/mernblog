@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userScheme = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -14,12 +14,21 @@ const userScheme = new mongoose.Schema(
     },
     password: {
       type: String,
-      require: false,
+      required: true,
+    },
+    profilePicture: {
+      type: String,
+      default:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userScheme);
+const User = mongoose.model("User", userSchema);
 
 export default User;
