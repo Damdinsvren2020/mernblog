@@ -4,6 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
+import { toggleTheme } from "../redux/theme/themeSlice";
 import { useEffect, useState } from "react";
 
 export default function Header() {
@@ -12,6 +13,7 @@ export default function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+  const { theme } = useSelector((state) => state.theme);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -40,10 +42,10 @@ export default function Header() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const urlParams = new URLSearchParams(location.search);
-    // urlParams.set("searchTerm", searchTerm);
-    // const searchQuery = urlParams.toString();
-    // navigate(`/search?${searchQuery}`);
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
   };
 
   return (
@@ -53,7 +55,7 @@ export default function Header() {
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
         <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-          Test's
+          Sahand's
         </span>
         Blog
       </Link>
@@ -77,8 +79,7 @@ export default function Header() {
           pill
           onClick={() => dispatch(toggleTheme())}
         >
-          {/* {theme === 'light' ? <FaSun /> : <FaMoon />} */}
-          <FaMoon />
+          {theme === "light" ? <FaSun /> : <FaMoon />}
         </Button>
         {currentUser ? (
           <Dropdown
