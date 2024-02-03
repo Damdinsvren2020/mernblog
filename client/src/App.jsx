@@ -8,6 +8,7 @@ import SignIn from "./pages/SignIn";
 import SingUp from "./pages/SignUp";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import PrivateRoute from "./Components/PrivateRoute";
 export default function App() {
   return (
     <BrowserRouter>
@@ -15,10 +16,13 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route path="/projects" element={<Projects />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SingUp />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>
